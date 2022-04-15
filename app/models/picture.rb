@@ -3,4 +3,5 @@ class Picture < ApplicationRecord
   validates :file, presence: true, blob: { content_type: ['image/jpeg', 'image/jpg'] }
 
   belongs_to :album
+  has_many :comments
 end

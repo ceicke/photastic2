@@ -16,7 +16,7 @@
         %td= picture.description
         %td= link_to 'Show', album_picture_path(@album, picture)
         %td= link_to 'Edit', edit_album_picture_path(@album, picture)
-        %td= link_to 'Destroy', album_picture_path(@album, picture), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Destroy', album_picture_path(@album, picture), method: :delete, data: { confirm: 'Are you sure?', 'turbo-method': :delete }
 
 %br
 

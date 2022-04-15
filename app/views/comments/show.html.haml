@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @comment.name
+%p
+  %b Comment:
+  = @comment.comment
+
+= link_to 'Edit', edit_album_picture_comment_path(@album, @picture, @comment)
+\|
+= link_to 'Back', album_picture_comments_path(@album, @picture)

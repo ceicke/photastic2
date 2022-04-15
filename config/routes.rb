@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root "albums#index"
 
   resources :albums do
-    resources :pictures
+    resources :pictures do
+      resources :comments
+    end
   end
 end

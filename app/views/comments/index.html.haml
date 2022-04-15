@@ -1,0 +1,23 @@
+%h1 Listing comments
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Comment
+      %th
+      %th
+      %th
+
+  %tbody
+    - @comments.each do |comment|
+      %tr
+        %td= comment.name
+        %td= comment.comment
+        %td= link_to 'Show', album_picture_comment_path(@album, @picture, comment)
+        %td= link_to 'Edit', edit_album_picture_comment_path(@album, @picture, comment)
+        %td= link_to 'Destroy', album_picture_comment_path(@album, @picture, comment), method: :delete, data: { confirm: 'Are you sure?', 'turbo-method': :delete }
+
+%br
+
+= link_to 'New Comment', new_album_picture_comment_path(@album, @picture)

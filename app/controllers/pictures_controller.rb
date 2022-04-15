@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: %i[ show edit update destroy ]
-  before_action :set_album, only: %i[ index new create edit update show destroy ]
+  before_action :set_album
 
   # GET /pictures or /pictures.json
   def index
@@ -54,7 +54,7 @@ class PicturesController < ApplicationController
     @picture.destroy
 
     respond_to do |format|
-      format.html { redirect_to pictures_url, notice: "Picture was successfully destroyed." }
+      format.html { redirect_to album_pictures_url(@album), notice: "Picture was successfully destroyed." }
       format.json { head :no_content }
     end
   end
