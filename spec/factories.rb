@@ -2,13 +2,13 @@ FactoryBot.define do
   factory :comment do
     name { Faker::Name.name }
     comment { Faker::Lorem.sentence }
-    picture
+    association :picture, factory: :picture, strategy: :create
   end
 
   factory :picture do
     file { Rack::Test::UploadedFile.new('spec/support/test.jpg') }
     description { Faker::Lorem.sentence }
-    album
+    association :album, factory: :album, strategy: :create
   end
 
   factory :album do
