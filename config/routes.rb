@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root "albums#index"
 
   resources :albums do
-    resources :pictures do
-      resources :comments
+    resources :pictures, only: [:show, :new, :edit, :create, :update, :destroy] do
+      resources :comments, only: [:create, :destroy]
     end
   end
 end

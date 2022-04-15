@@ -1,8 +1,19 @@
 class Picture < ApplicationRecord
-  has_one_attached :file
   validates :file, presence: true, blob: { content_type: ['image/jpeg', 'image/jpg'] }
   validates :album_id, presence: true
 
+  has_one_attached :file do |attachable|
+    attachable.variant :thumb, resize_to_limit: [450, 450]
+  end
+
   belongs_to :album
-  has_many :comments
+  has_many :comments, dependent: :destroy
+
+  before_destroy :remove_file
+
+  private
+    def remove_file
+      file.purge
+    end
+
 end

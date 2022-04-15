@@ -7,11 +7,11 @@
       %ul
         - album.errors.each do |error|
           %li= error.full_message
-  %div
-    = form.label :name, style: "display: block"
-    = form.text_field :name
-  %div
-    = form.label :passcode, style: "display: block"
-    = form.text_field :passcode
-  %div
-    = form.submit
+  .mb-3
+    = form.label :name, class: 'form-label'
+    = form.text_field :name, class: 'form-control', required: true
+  .mb-3
+    = form.label :passcode, class: 'form-label'
+    = form.text_field :passcode, class: 'form-control', required: true
+  .actions
+    = form.submit 'Speichern', class: 'btn btn-primary'

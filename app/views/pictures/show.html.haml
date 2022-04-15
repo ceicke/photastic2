@@ -1,12 +1,45 @@
 %p#notice= notice
 
-%p
-  %b File:
-  = @picture.file
-%p
-  %b Description:
-  = @picture.description
+.row
+  .col
+    %figure.figure
+      %img.img-fluid.rounded{src: url_for(@picture.file), alt: @picture.description }
+      %figcaption.figure-caption
+        = I18n.l(@picture.created_at, format: :long)
+.row
+  .col
+    %p= @picture.description
+
+- @picture.comments.each do |comment|
+  .row
+    .col
+      %p
+        .text-muted
+          = comment.name
+          = "(#{I18n.l(comment.created_at, format: :long)}):"
+        = comment.comment
+        = link_to 'Löschen', album_picture_comment_path(@album, @picture, comment), data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete }
+
+.row
+  .col
+    %h3 Neuer Kommentar
+    = form_for [@album, @picture, @comment], class: 'mb-3' do |f|
+      - if @comment.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
+          %ul
+            - @comment.errors.full_messages.each do |message|
+              %li= message
+
+      .mb-3
+        = f.label :name, class: 'form-label'
+        = f.text_field :name, class: 'form-control'
+      .mb-3
+        = f.label :comment, class: 'form-label'
+        = f.text_area :comment, class: 'form-control'
+      .actions
+        = f.submit 'Speichern', class: 'btn btn-primary'
 
 = link_to 'Edit', edit_album_picture_path(@album, @picture)
 \|
-= link_to 'Back', album_pictures_path(@album)
+= link_to 'Back', album_path(@album)

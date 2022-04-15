@@ -1,5 +1,12 @@
 %h1 Editing album
-= render "form", album: @album
+.row
+  .col-md-6
+    = render "form", album: @album
+  .col-md-6
+    .p-3.mb-2.mt-2.rounded.border.border-danger.border-5
+      %h3 Album löschen
+      = button_to 'Löschen', album_path(@album), method: :delete, data: { turbo: false }, class: 'btn btn-danger'
+
 %br/
 %div
   = link_to "Show this album", @album
