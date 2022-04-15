@@ -1,0 +1,12 @@
+%h1 Video bearbeiten
+
+.row
+  .col-md-6
+    = render 'form'
+  .col-md-6
+    .p-3.mb-2.mt-2.rounded.border.border-danger.border-5
+      %h3 Video löschen
+      = button_to 'Löschen', album_video_path(@album, @video), method: :delete, data: { turbo: false }, class: 'btn btn-danger'
+
+.mt-3
+  = link_to 'Abbrechen', album_video_path(@album, @video), class: 'btn btn-secondary'

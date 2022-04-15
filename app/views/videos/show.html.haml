@@ -1,0 +1,25 @@
+%p#notice= notice
+
+.row
+  .col.mb-3
+    = link_to 'Zurück', album_path(@album, anchor: "#{dom_id @video}"), class: 'btn btn-primary'
+    = link_to 'Bearbeiten', edit_album_video_path(@album, @video), class: 'btn btn-secondary'
+.row
+  .col
+    %figure.figure
+      - if @video.processed?
+        %video{controls: 'true', post: url_for(@video.preview_image.variant(:thumb))}
+          %source{src: url_for(@video.video_file), type: 'video/mp4'}
+      - else
+        - if @video.coconut_failed?
+          .d-flex.align-items-center.justify-content-center{style: 'min-height: 18rem; background-color: #c0c0c0;'}
+            %h1 😵
+        - else
+          .d-flex.align-items-center.justify-content-center{style: 'min-height: 18rem; min-width: 20rem; background-color: #c0c0c0;'}
+            .spinner-border.text-dark.top-50{role: 'status'}
+              %span.visually-hidden Video is processing...
+      %figcaption.figure-caption
+        = I18n.l(@video.created_at, format: :long)
+.row
+  .col
+    %p= @video.description

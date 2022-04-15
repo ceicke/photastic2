@@ -47,6 +47,9 @@ gem "bootsnap", require: false
 
 gem "haml-rails", "~> 2.0"
 
+gem "coconutrb", "~> 3.0.0"
+gem "aws-sdk-s3", "~> 1"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -72,6 +75,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "pry"
 end
 
 group :test do

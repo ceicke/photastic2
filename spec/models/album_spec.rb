@@ -16,6 +16,29 @@ RSpec.describe Album, type: :model do
     expect(album).to_not be_valid
   end
 
+  it 'generates a list of elements' do
+    album = create(:album)
+
+    2.times do
+      create(:picture, album: album)
+    end
+    2.times do
+      create(:video, album: album)
+    end
+
+    expect(album.stream.length).to eq(4)
+  end
+
+  it 'orders the elements by created_at with newest on top' do
+    album = create(:album)
+
+    create(:picture, album: album, created_at: Date.yesterday)
+    create(:video, album: album, created_at: Date.tomorrow)
+
+    expect(album.stream.first.created_at).to eq(Date.tomorrow)
+    expect(album.stream.last.created_at).to eq(Date.yesterday)
+  end
+
   it 'generates a correct subdomain' do
     album = build(:album, name: 'Some test')
     expect(album.subdomain).to eq('some_test')

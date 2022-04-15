@@ -4,7 +4,11 @@
       = link_to album do
         %img.card-img-top{ src: url_for(album.pictures.first.file.variant(:thumb)), loading: 'lazy', alt: album.name }
     - else
-      = link_to "Öffnen", album, class: 'card-link'
+      = link_to album do
+        = image_tag 'c4c4c4.jpg', loading: 'lazy', alt: album.name, class: 'card-img-top'
     .card-body
       %p= album.name
-      %small.text-muted= pluralize(album.pictures.count, 'Bild', plural: 'Bilder')
+      %small.text-muted
+        = pluralize(album.pictures.count, 'Bild', plural: 'Bilder')
+        = ' / '
+        = pluralize(album.videos.count, 'Video', plural: 'Videos')

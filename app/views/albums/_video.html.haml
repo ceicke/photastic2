@@ -1,0 +1,18 @@
+.col-md-4.mb-3
+  .card{id: "#{dom_id video}"}
+    = link_to album_video_path(@album, video), class: 'text-decoration-none' do
+      - if video.processed?
+        %img.card-img-top{ src: url_for(video.preview_image.variant(:thumb)), loading: 'lazy', alt: video.description }
+      - else
+        - if video.coconut_failed?
+          .d-flex.align-items-center.justify-content-center{style: 'min-height: 18rem; background-color: #c0c0c0;'}
+            %h1 😵
+        - else
+          .d-flex.align-items-center.justify-content-center{style: 'min-height: 18rem; background-color: #c0c0c0;'}
+            .spinner-border.text-dark.top-50{role: 'status'}
+              %span.visually-hidden Video is processing...
+    .card-body
+      %p.card-text
+        %small.text-muted= I18n.l(video.created_at, format: :long)
+      %p.card-text= video.description
+      -# %small.text-muted= pluralize(video.comments.length, 'Kommentar', plural: 'Kommentare')

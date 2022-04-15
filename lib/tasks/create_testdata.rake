@@ -1,6 +1,6 @@
 require 'down'
 
-desc 'Create basic testdata for development'
+desc 'Create albums with images for development'
 task :hello_world => :environment do
   rand(2..5).times do
     album = Album.create(name: Faker::Name.first_name, passcode: Faker::String.random(length: 8))
@@ -38,4 +38,18 @@ task :hello_big_world => :environment do
     end
   end
   File.delete('tmp/tmp_file.jpg')
+end
+
+desc 'Create albums with videos for development'
+task :hello_movie_world => :environment do
+  rand(2..5).times do
+    album = Album.create(name: "Videos: #{Faker::Name.first_name}", passcode: Faker::String.random(length: 8))
+    print '📔 '
+    rand(8..12).times do
+      video = Video.new(album: album, description: Faker::Lorem.sentence)
+      video.original_file.attach(io: File.open('spec/support/test.mp4'), filename: 'test.mp4')
+      video.save
+      print '📹 '
+    end
+  end
 end
