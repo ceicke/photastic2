@@ -1,14 +1,11 @@
 %p{:style => "color: green"}= notice
 
-%h1= @album.name
+.row
+  .col.mb-3
+    %h1= @album.name
+    = link_to "Bild hochladen", new_album_picture_path(@album), class: 'btn btn-primary'
+    = link_to "Album bearbeiten", edit_album_path(@album), class: 'btn btn-secondary'
 
 .row
-  - @album.pictures.each do |picture|
+  - @album.pictures.order(created_at: :desc).each do |picture|
     = render partial: 'albums/picture', locals: {picture: picture}
-
-%div
-  = link_to "Upload picture", new_album_picture_path(@album)
-  |
-  = link_to "Edit this album", edit_album_path(@album)
-  |
-  = link_to "Back to albums", albums_path

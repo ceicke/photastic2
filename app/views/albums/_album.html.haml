@@ -2,8 +2,9 @@
   .card{id: "#{dom_id album}"}
     - if album.pictures.any?
       = link_to album do
-        %img.card-img-top{ src: url_for(album.pictures.first.file.variant(:thumb)), alt: album.name }
+        %img.card-img-top{ src: url_for(album.pictures.first.file.variant(:thumb)), loading: 'lazy', alt: album.name }
     - else
       = link_to "Öffnen", album, class: 'card-link'
     .card-body
       %p= album.name
+      %small.text-muted= pluralize(album.pictures.count, 'Bild', plural: 'Bilder')

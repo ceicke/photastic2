@@ -2,5 +2,5 @@
 .row
   .col-md-12
     = render 'form'
-
-= link_to 'Back', album_pictures_path(@album)
+.mt-3
+  = link_to "Abbrechen", album_path(@album), class: 'btn btn-secondary'

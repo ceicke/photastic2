@@ -1,4 +1,4 @@
-%h1 Editing picture
+%h1 Bild bearbeiten
 
 .row
   .col-md-6
@@ -8,4 +8,5 @@
       %h3 Bild löschen
       = button_to 'Löschen', album_picture_path(@album, @picture), method: :delete, data: { turbo: false }, class: 'btn btn-danger'
 
-= link_to 'Back', album_picture_path(@album, @picture)
+.mt-3
+  = link_to 'Abbrechen', album_picture_path(@album, @picture), class: 'btn btn-secondary'

@@ -1,6 +1,10 @@
 %p#notice= notice
 
 .row
+  .col.mb-3
+    = link_to 'Zurück', album_path(@album, anchor: "#{dom_id @picture}"), class: 'btn btn-primary'
+    = link_to 'Bearbeiten', edit_album_picture_path(@album, @picture), class: 'btn btn-secondary'
+.row
   .col
     %figure.figure
       %img.img-fluid.rounded{src: url_for(@picture.file), alt: @picture.description }
@@ -39,7 +43,3 @@
         = f.text_area :comment, class: 'form-control'
       .actions
         = f.submit 'Speichern', class: 'btn btn-primary'
-
-= link_to 'Edit', edit_album_picture_path(@album, @picture)
-\|
-= link_to 'Back', album_path(@album)

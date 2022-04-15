@@ -1,7 +1,7 @@
 %p{:style => "color: green"}= notice
 %h1 Albums
+= link_to "New album", new_album_path, class: 'btn btn-primary'
+%hr
 .row
   - @albums.each do |album|
     = render album
-
-= link_to "New album", new_album_path
