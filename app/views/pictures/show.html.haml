@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b File:
+  = @picture.file
+%p
+  %b Description:
+  = @picture.description
+
+= link_to 'Edit', edit_album_picture_path(@album, @picture)
+\|
+= link_to 'Back', album_pictures_path(@album)
