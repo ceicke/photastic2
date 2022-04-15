@@ -11,7 +11,7 @@ RSpec.describe Video, type: :model do
   end
 
   it 'is not valid without a file' do
-    video = build(:video, file: nil)
+    video = build(:video, original_file: nil)
     expect(video).to_not be_valid
   end
 end
