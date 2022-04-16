@@ -27,7 +27,6 @@ set :branch, "main"
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"
 
-# deploy.rb
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 append :linked_files, 'config/master.key', 'config/credentials/production.key'
 
@@ -52,3 +51,11 @@ set :deploy_via, :remote_cache
 set :deploy_to, "/home/#{fetch(:user)}/app/"
 set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :rvm_ruby_verion, 'ruby-3.1.0'
+
+namespace :deploy do
+  after :finishing, :restart_delayed_job do
+    on roles(:app) do
+      # bla
+    end
+  end
+end

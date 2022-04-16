@@ -93,6 +93,8 @@ end
 
 group :production do
   gem "pg"
-  gem "daemon"
-  gem "delayed_job_active_record"
 end
+
+gem "sidekiq", "~> 6.4"
+gem "redis-namespace"
+gem 'sinatra', require: false

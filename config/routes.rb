@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "albums#index"
@@ -12,4 +13,5 @@ Rails.application.routes.draw do
   end
 
   post 'api/video_callback'
+  mount Sidekiq::Web => '/sidekiq
 end
