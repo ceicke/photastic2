@@ -7,7 +7,7 @@
 .row
   .col
     %figure.figure
-      %img.img-fluid.rounded{src: url_for(@picture.file), alt: @picture.description }
+      %img.img-fluid.rounded{src: url_for(@picture.file.variant(:large), alt: @picture.description }
       %figcaption.figure-caption
         = I18n.l(@picture.created_at, format: :long)
 .row
