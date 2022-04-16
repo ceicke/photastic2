@@ -55,7 +55,7 @@ set :rvm_ruby_verion, 'ruby-3.1.0'
 namespace :deploy do
   after :finishing, :restart_delayed_job do
     on roles(:app) do
-      # bla
+      execute "tmux new-session -d -s sidekiq bundle exec sidekiq -C config/sidekiq.yml"
     end
   end
 end

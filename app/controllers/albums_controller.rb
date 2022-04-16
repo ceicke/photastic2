@@ -3,11 +3,14 @@ class AlbumsController < ApplicationController
 
   # GET /albums or /albums.json
   def index
-    @albums = Album.all
+    @albums = Album.where(hidden: false)
   end
 
   # GET /albums/1 or /albums/1.json
   def show
+    if @album.hidden?
+      redirect_to root_path, notice: "Album is slated to be removed"
+    end
   end
 
   # GET /albums/new
@@ -49,7 +52,8 @@ class AlbumsController < ApplicationController
 
   # DELETE /albums/1 or /albums/1.json
   def destroy
-    @album.destroy
+    @album.update_attribute(:hidden, true)
+    DeleteAlbumJob.perform_later(@album)
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: "Album was successfully destroyed." }
