@@ -29,7 +29,7 @@ set :branch, "main"
 
 # deploy.rb
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
-append :linked_files, 'config/database.yml', 'config/master.key', 'config/credentials/production.key'
+append :linked_files, 'config/master.key', 'config/credentials/production.key'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
