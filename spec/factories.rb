@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :video do
     original_file { Rack::Test::UploadedFile.new('spec/support/test.mp4') }
     description { Faker::Lorem.sentence }
-    processed { false }
+    status { 0 }
     association :album, factory: :album, strategy: :create
   end
 

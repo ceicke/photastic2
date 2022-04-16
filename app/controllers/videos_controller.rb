@@ -22,7 +22,7 @@ class VideosController < ApplicationController
 
     respond_to do |format|
       if @video.save
-        @video.transcode
+        VideoTranscodingJob.perform_later(@video)
         format.html { redirect_to album_video_url(@album, @video), notice: "Video was successfully created." }
         format.json { render :show, status: :created, location: @video }
       else

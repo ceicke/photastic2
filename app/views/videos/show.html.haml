@@ -7,11 +7,11 @@
 .row
   .col
     %figure.figure
-      - if @video.processed?
+      - if @video.completed?
         %video{controls: 'true', post: url_for(@video.preview_image.variant(:thumb))}
           %source{src: url_for(@video.video_file), type: 'video/mp4'}
       - else
-        - if @video.coconut_failed?
+        - if @video.failed?
           .d-flex.align-items-center.justify-content-center{style: 'min-height: 18rem; background-color: #c0c0c0;'}
             %h1 😵
         - else

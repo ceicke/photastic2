@@ -6,8 +6,8 @@ RSpec.describe Video, type: :model do
     expect(video).to be_valid
   end
 
-  it 'should default to unprocessed' do
-    expect(Video.new.processed?).to be false
+  it 'should default to queued' do
+    expect(Video.new.queued?).to be true
   end
 
   it 'is not valid without a file' do
