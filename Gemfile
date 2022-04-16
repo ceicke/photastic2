@@ -51,6 +51,8 @@ gem "coconutrb", "~> 3.0.0"
 gem "aws-sdk-s3", "~> 1"
 
 gem "down"
+
+gem "ruby-vips"
 # Use Sass to process CSS
 # gem "sassc-rails"
 

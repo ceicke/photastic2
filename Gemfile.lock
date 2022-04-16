@@ -382,6 +382,7 @@ DEPENDENCIES
   rails (~> 7.0.2, >= 7.0.2.3)
   redis-namespace
   rspec-rails
+  ruby-vips
   selenium-webdriver
   sidekiq (~> 6.4)
   sinatra
