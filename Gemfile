@@ -93,4 +93,6 @@ end
 
 group :production do
   gem "pg"
+  gem "daemon"
+  gem "delayed_job_active_record"
 end
