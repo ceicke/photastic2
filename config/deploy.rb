@@ -6,6 +6,7 @@ set :repo_url, "git@github.com:ceicke/photastic2.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, "main"
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
@@ -56,5 +57,4 @@ set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-
-set :rvm_ruby_string, '3.1.0@photstic2' # you probably have this already
+set :rvm_ruby_verion, 'ruby-3.1.0'
