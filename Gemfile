@@ -50,6 +50,7 @@ gem "haml-rails", "~> 2.0"
 gem "coconutrb", "~> 3.0.0"
 gem "aws-sdk-s3", "~> 1"
 
+gem "down"
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -63,7 +64,6 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
-  gem "down"
 end
 
 group :development do
