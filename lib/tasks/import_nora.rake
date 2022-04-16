@@ -22,8 +22,9 @@ task :import_noras_pictures => :environment do
     )
     p.file.attach(io: File.open('tmp/nora.jpg'), filename: 'test.jpg')
     p.save
-    p.file.variant(:thumb).process
     File.delete('tmp/nora.jpg')
+    
+    ProcessVariantsJob.perform_later(p)
 
     picture['comments'].each do |comment|
       Comment.create(
