@@ -53,9 +53,11 @@ set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_
 set :rvm_ruby_verion, 'ruby-3.1.0'
 
 namespace :deploy do
-  after :finishing, :restart_delayed_job do
+  after :finishing, :restart_services do
     on roles(:app) do
-      execute "tmux new-session -d -s sidekiq bundle exec sidekiq -C config/sidekiq.yml"
+      execute "/bin/bash --login -c 'tmux kill-session -t sidekiq'"
+      execute "/bin/bash --login -c 'rvm use 3.1.0 && cd app/current/ && tmux new-session -d -s sidekiq bundle exec sidekiq -C config/sidekiq.yml'"
+      execute "/bin/bash --login -c 'sudo /etc/init.d/apache2 restart'"
     end
   end
 end
