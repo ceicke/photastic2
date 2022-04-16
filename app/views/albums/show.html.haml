@@ -1,15 +1,15 @@
-%p{:style => "color: green"}= notice
+- cache do
+  %p{:style => "color: green"}= notice
+  .row
+    .col.mb-3
+      %h1= @album.name
+      = link_to "Bild hochladen", new_album_picture_path(@album), class: 'btn btn-primary'
+      = link_to "Video hochladen", new_album_video_path(@album), class: 'btn btn-primary'
+      = link_to "Album bearbeiten", edit_album_path(@album), class: 'btn btn-secondary'
 
-.row
-  .col.mb-3
-    %h1= @album.name
-    = link_to "Bild hochladen", new_album_picture_path(@album), class: 'btn btn-primary'
-    = link_to "Video hochladen", new_album_video_path(@album), class: 'btn btn-primary'
-    = link_to "Album bearbeiten", edit_album_path(@album), class: 'btn btn-secondary'
-
-.row
-  - @album.stream.each do |stream_element|
-    - if stream_element.class == Picture
-      = render partial: 'albums/picture', locals: {picture: stream_element}
-    - else
-      = render partial: 'albums/video', locals: {video: stream_element}
+  .row
+    - @album.stream.each do |stream_element|
+      - if stream_element.class == Picture
+        = render partial: 'albums/picture', locals: {picture: stream_element}
+      - else
+        = render partial: 'albums/video', locals: {video: stream_element}
