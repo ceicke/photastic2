@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   end
 
   post 'api/video_callback'
-  mount Sidekiq::Web => '/sidekiq
+  mount Sidekiq::Web => '/sidekiq'
 end
