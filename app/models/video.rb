@@ -11,21 +11,11 @@ class Video < ApplicationRecord
   enum :status, { queued: 0, transcoding: 1, transfering: 2, failed: 3, completed: 4 }
 
   belongs_to :album
-  # has_many :comments, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
 
   before_destroy :remove_files
 
   private
-    def get_coconut_status
-      Coconut.api_key = Rails.application.credentials.coconut[:api_key]
-
-      if coconut_job_id.nil?
-        return nil
-      else
-        Coconut::Job.retrieve(coconut_job_id)
-      end
-    end
-
     def remove_files
       original_file.purge
       preview_image.purge

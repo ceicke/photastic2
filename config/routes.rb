@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :pictures, only: [:show, :new, :edit, :create, :update, :destroy] do
       resources :comments, only: [:create, :destroy]
     end
-    resources :videos , only: [:show, :new, :edit, :create, :update, :destroy]
+    resources :videos , only: [:show, :new, :edit, :create, :update, :destroy] do
+      resources :comments, only: [:create, :destroy]
+    end
   end
 
   post 'api/video_callback'

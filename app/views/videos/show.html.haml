@@ -8,7 +8,7 @@
   .col
     %figure.figure
       - if @video.completed?
-        %video{controls: 'true', post: url_for(@video.preview_image.variant(:thumb))}
+        %video.ratio.ratio-16x9{controls: 'true', post: url_for(@video.preview_image.variant(:thumb))}
           %source{src: url_for(@video.video_file), type: 'video/mp4'}
       - else
         - if @video.failed?
@@ -23,3 +23,33 @@
 .row
   .col
     %p= @video.description
+
+- @video.comments.each do |comment|
+  .row
+    .col
+      %p
+        .text-muted
+          = comment.name
+          = "(#{I18n.l(comment.created_at, format: :long)}):"
+        = comment.comment
+        = link_to 'Löschen', album_video_comment_path(@album, @video, comment), data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete }
+
+.row
+  .col
+    %h3 Neuer Kommentar
+    = form_for [@album, @video, @comment], class: 'mb-3' do |f|
+      - if @comment.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
+          %ul
+            - @comment.errors.full_messages.each do |message|
+              %li= message
+
+      .mb-3
+        = f.label :name, class: 'form-label'
+        = f.text_field :name, class: 'form-control'
+      .mb-3
+        = f.label :comment, class: 'form-label'
+        = f.text_area :comment, class: 'form-control'
+      .actions
+        = f.submit 'Speichern', class: 'btn btn-primary'

@@ -42,3 +42,7 @@
 /config/credentials/development.key
 
 /config/credentials/test.key
+
+# Ignore Noras imports
+/lib/tasks/pictures.json
+/lib/tasks/videos.json

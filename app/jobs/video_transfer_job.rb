@@ -18,18 +18,18 @@ class VideoTransferJob < ApplicationJob
 
   private
     def transfer_video_file(s3_client, video)
-      s3_client.get_object({bucket: 'photasti.cc', key: "photastic2/video_#{video.id}/1080p.mp4"}, target: 'tmp/1080p.mp4')
-      video.video_file.attach(io: File.open('tmp/1080p.mp4'), filename: '1080p.mp4')
+      s3_client.get_object({bucket: 'photasti.cc', key: "photastic2/video_#{video.id}/1080p.mp4"}, target: "tmp/#{video.id}-1080p.mp4")
+      video.video_file.attach(io: File.open("tmp/#{video.id}-1080p.mp4"), filename: '1080p.mp4')
 
       s3_client.delete_object(bucket: 'photasti.cc', key: "photastic2/video_#{video.id}/1080p.mp4")
-      File.delete('tmp/1080p.mp4')
+      File.delete("tmp/#{video.id}-1080p.mp4")
     end
 
     def transfer_preview_file(s3_client, video)
-      s3_client.get_object({bucket: 'photasti.cc', key: "photastic2/video_#{video.id}/preview.jpg"}, target: 'tmp/preview.jpg')
-      video.preview_image.attach(io: File.open('tmp/preview.jpg'), filename: 'preview.jpg')
+      s3_client.get_object({bucket: 'photasti.cc', key: "photastic2/video_#{video.id}/preview.jpg"}, target: "tmp/#{video.id}-preview.jpg")
+      video.preview_image.attach(io: File.open("tmp/#{video.id}-preview.jpg"), filename: 'preview.jpg')
 
       s3_client.delete_object(bucket: 'photasti.cc', key: "photastic2/video_#{video.id}/preview.jpg")
-      File.delete('tmp/preview.jpg')
+      File.delete("tmp/#{video.id}-preview.jpg")
     end
 end

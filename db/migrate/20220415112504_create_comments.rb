@@ -3,9 +3,12 @@ class CreateComments < ActiveRecord::Migration[7.0]
     create_table :comments do |t|
       t.string :name
       t.text :comment
-      t.integer :picture_id
+      t.bigint :commentable_id
+      t.string :commentable_type
 
       t.timestamps
     end
+
+    add_index :comments, [:commentable_type, :commentable_id]
   end
 end

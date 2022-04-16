@@ -7,7 +7,7 @@ class Picture < ApplicationRecord
   end
 
   belongs_to :album
-  has_many :comments, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
 
   before_destroy :remove_file
 
