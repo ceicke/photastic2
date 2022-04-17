@@ -91,6 +91,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
     capistrano (3.17.0)
       airbrussh (>= 1.0.0)
@@ -187,6 +190,18 @@ GEM
     jmespath (1.6.1)
     jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
@@ -360,6 +375,7 @@ DEPENDENCIES
   activestorage-validator
   aws-sdk-s3 (~> 1)
   bootsnap
+  bootstrap5-kaminari-views
   capistrano
   capistrano-bundler
   capistrano-rails
@@ -376,6 +392,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
+  kaminari
   pg
   pry
   puma (~> 5.0)

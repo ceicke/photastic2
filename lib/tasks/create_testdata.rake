@@ -12,7 +12,7 @@ task :hello_world => :environment do
       picture.save
       print '📷 '
       rand(0..3).times do
-        Comment.create(picture: picture, name: Faker::Name.name, comment: Faker::Lorem.sentence)
+        Comment.create(commentable: picture, name: Faker::Name.name, comment: Faker::Lorem.sentence)
         print '📝 '
       end
     end
@@ -30,9 +30,10 @@ task :hello_big_world => :environment do
       picture = Picture.new(album: album, description: Faker::Lorem.sentence)
       picture.file.attach(io: File.open('tmp/tmp_file.jpg'), filename: 'test.jpg')
       picture.save
+      ProcessVariantsJob.perform_later(picture)
       print '📷 '
       rand(0..3).times do
-        Comment.create(picture: picture, name: Faker::Name.name, comment: Faker::Lorem.sentence)
+        Comment.create(commentable: picture, name: Faker::Name.name, comment: Faker::Lorem.sentence)
         print '📝 '
       end
     end

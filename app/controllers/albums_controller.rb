@@ -11,6 +11,8 @@ class AlbumsController < ApplicationController
     if @album.hidden?
       redirect_to root_path, notice: "Album is slated to be removed"
     end
+
+    @elements = Kaminari.paginate_array(@album.stream).page(params[:page]).per(50)
   end
 
   # GET /albums/new

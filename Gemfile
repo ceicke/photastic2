@@ -53,6 +53,9 @@ gem "aws-sdk-s3", "~> 1"
 gem "down"
 
 gem "ruby-vips"
+
+gem "kaminari"
+gem "bootstrap5-kaminari-views"
 # Use Sass to process CSS
 # gem "sassc-rails"
 

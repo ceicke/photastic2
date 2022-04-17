@@ -8,8 +8,12 @@
     = link_to "Album bearbeiten", edit_album_path(@album), class: 'btn btn-secondary'
 
 .row
-  - @album.stream.each do |stream_element|
+  - @elements.each do |stream_element|
     - if stream_element.class == Picture
       = render partial: 'albums/picture', locals: {picture: stream_element}
     - else
       = render partial: 'albums/video', locals: {video: stream_element}
+
+.row
+  .col
+    = paginate @elements, theme: 'bootstrap-5', pagination_class: "pagination-sm flex-wrap justify-content-center", nav_class: "d-inline-block"
