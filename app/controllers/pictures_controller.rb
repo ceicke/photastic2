@@ -23,6 +23,9 @@ class PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.save
+
+        ProcessVariantsJob.perform_later(@picture)
+
         format.html { redirect_to album_picture_url(@album, @picture), notice: "Picture was successfully created." }
         format.json { render :show, status: :created, location: @picture }
       else

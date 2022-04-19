@@ -69,6 +69,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
+  gem "pry"
 end
 
 group :development do
@@ -80,7 +81,6 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem "pry"
 
   gem "capistrano", require: false
   gem "capistrano-rvm", require: false
