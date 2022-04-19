@@ -18,8 +18,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Install xmllint
-        run: sudo apt-get install -y vips
+      - name: Install vips
+        run: sudo apt-get install -y libvips
       # Add or replace dependency steps here
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
