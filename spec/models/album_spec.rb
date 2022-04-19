@@ -35,8 +35,8 @@ RSpec.describe Album, type: :model do
     create(:picture, album: album, created_at: Date.yesterday)
     create(:video, album: album, created_at: Date.tomorrow)
 
-    expect(album.stream.first.created_at).to eq(Date.tomorrow)
-    expect(album.stream.last.created_at).to eq(Date.yesterday)
+    expect(album.stream.first.created_at.to_date).to eq(Date.tomorrow)
+    expect(album.stream.last.created_at.to_date).to eq(Date.yesterday)
   end
 
   it 'generates a correct subdomain' do

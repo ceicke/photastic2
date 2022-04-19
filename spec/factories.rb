@@ -9,7 +9,7 @@ FactoryBot.define do
   factory :comment do
     name { Faker::Name.name }
     comment { Faker::Lorem.sentence }
-    association :picture, factory: :picture, strategy: :create
+    association :commentable, factory: :picture, strategy: :create
   end
 
   factory :picture do
