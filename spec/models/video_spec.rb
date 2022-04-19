@@ -14,4 +14,9 @@ RSpec.describe Video, type: :model do
     video = build(:video, original_file: nil)
     expect(video).to_not be_valid
   end
+
+  it 'defaults to the status "queued"' do
+    video = Video.new
+    expect(video.queued?).to be(true)
+  end
 end

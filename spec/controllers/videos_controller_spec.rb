@@ -7,7 +7,7 @@ describe VideosController do
       ActiveJob::Base.queue_adapter = :test
 
       album = create(:album)
-      video = build(:video, album: video)
+      video = build(:video, album: album)
 
       expect {
         post :create, params: {
