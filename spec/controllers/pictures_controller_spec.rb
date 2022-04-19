@@ -3,7 +3,7 @@ require 'rails_helper'
 describe PicturesController do
 
   describe "#create" do
-    it "the job for processing variants" do
+    it "the job for processing variants is enqueed" do
       ActiveJob::Base.queue_adapter = :test
 
       album = create(:album)
