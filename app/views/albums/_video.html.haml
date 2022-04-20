@@ -28,13 +28,13 @@
               = button_to 'Löschen', album_video_comment_path(@album, video, comment), class: 'btn btn-danger', method: :delete, data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete }
       .row
         .col
-          %button.btn.btn-primary{"data-bs-target" => "#commentModal-#{video.id}", "data-bs-toggle" => "modal", :type => "button"} Neuer Kommentar
-          .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :tabindex => "-1", id: "commentModal-#{video.id}"}
+          %button.btn.btn-primary{"data-bs-target" => "#commentModal-#{video.id}", "data-bs-toggle" => "modal", type: "button"} Neuer Kommentar
+          .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", tabindex: "-1", id: "commentModal-#{video.id}"}
             .modal-dialog
               .modal-content
                 .modal-header
                   %h5#exampleModalLabel.modal-title Neuer Kommentar
-                  %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+                  %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
                 .modal-body
                   - @comment = Comment.new
                   = form_for [@album, video, @comment], class: 'mb-3' do |f|
@@ -54,4 +54,4 @@
                     .actions
                       = f.submit 'Speichern', class: 'btn btn-primary'
                 .modal-footer
-                  %button.btn.btn-secondary{"data-bs-dismiss" => "modal", :type => "button"} Schließen
+                  %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Schließen
