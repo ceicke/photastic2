@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe PicturesHelper, :type => :helper do
+RSpec.describe AlbumsHelper, :type => :helper do
   describe "#generate_back_link" do
     it "generates a link with page param" do
       cookies[:page] = '5'

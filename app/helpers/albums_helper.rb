@@ -1,4 +1,4 @@
-module PicturesHelper
+module AlbumsHelper
 
   def generate_back_link(album, picture)
 

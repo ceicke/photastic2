@@ -16,4 +16,33 @@
                 = comment.name
                 = "(#{I18n.l(comment.created_at, format: :long)}):"
               = comment.comment
-              = link_to 'Löschen', album_picture_comment_path(@album, picture, comment), data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete }
+              = button_to 'Löschen', album_picture_comment_path(@album, picture, comment), class: 'btn btn-danger', method: :delete, data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete }
+      .row
+        .col
+          %button.btn.btn-primary{"data-bs-target" => "#commentModal-#{picture.id}", "data-bs-toggle" => "modal", :type => "button"} Neuer Kommentar
+          .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :tabindex => "-1", id: "commentModal-#{picture.id}"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %h5#exampleModalLabel.modal-title Neuer Kommentar
+                  %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+                .modal-body
+                  - @comment = Comment.new
+                  = form_for [@album, picture, @comment], class: 'mb-3' do |f|
+                    - if @comment.errors.any?
+                      #error_explanation
+                        %h2= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
+                        %ul
+                          - @comment.errors.full_messages.each do |message|
+                            %li= message
+
+                    .mb-3
+                      = f.label :name, class: 'form-label'
+                      = f.text_field :name, class: 'form-control'
+                    .mb-3
+                      = f.label :comment, class: 'form-label'
+                      = f.text_area :comment, class: 'form-control'
+                    .actions
+                      = f.submit 'Speichern', class: 'btn btn-primary'
+                .modal-footer
+                  %button.btn.btn-secondary{"data-bs-dismiss" => "modal", :type => "button"} Schließen

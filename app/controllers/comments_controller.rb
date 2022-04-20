@@ -11,9 +11,9 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html {
           if @element.is_a? Picture
-            redirect_to album_picture_url(@album, @element), notice: "Comment was successfully created."
+            redirect_to album_url(@album, page: cookies[:page], anchor: "picture_#{@element.id}"), notice: "Comment was successfully created."
           elsif @element.is_a? Video
-            redirect_to album_video_url(@album, @element), notice: "Comment was successfully created."
+            redirect_to album_url(@album, page: cookies[:page], anchor: "video_#{@element.id}"), notice: "Comment was successfully created."
           end
         }
         format.json { render :show, status: :created, location: @comment }
@@ -31,9 +31,9 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html {
         if @element.is_a? Picture
-          redirect_to album_picture_comments_url(@album, @element), notice: "Comment was successfully destroyed."
+          redirect_to album_url(@album, page: cookies[:page], anchor: "picture_#{@element.id}"), notice: "Comment was successfully destroyed."
         elsif @element.is_a? Video
-          redirect_to album_video_comments_url(@album, @element), notice: "Comment was successfully destroyed."
+          redirect_to album_url(@album, page: cookies[:page], anchor: "video_#{@element.id}"), notice: "Comment was successfully destroyed."
         end
       }
       format.json { head :no_content }

@@ -2,7 +2,7 @@
 
 .row
   .col.mb-3
-    = link_to 'Zurück', album_path(@album, anchor: "#{dom_id @video}"), class: 'btn btn-primary'
+    = generate_back_link(@album, @video)
     = link_to 'Bearbeiten', edit_album_video_path(@album, @video), class: 'btn btn-secondary'
 .row
   .col
@@ -32,24 +32,3 @@
           = comment.name
           = "(#{I18n.l(comment.created_at, format: :long)}):"
         = comment.comment
-        = link_to 'Löschen', album_video_comment_path(@album, @video, comment), data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete }
-
-.row
-  .col
-    %h3 Neuer Kommentar
-    = form_for [@album, @video, @comment], class: 'mb-3' do |f|
-      - if @comment.errors.any?
-        #error_explanation
-          %h2= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
-          %ul
-            - @comment.errors.full_messages.each do |message|
-              %li= message
-
-      .mb-3
-        = f.label :name, class: 'form-label'
-        = f.text_field :name, class: 'form-control'
-      .mb-3
-        = f.label :comment, class: 'form-label'
-        = f.text_area :comment, class: 'form-control'
-      .actions
-        = f.submit 'Speichern', class: 'btn btn-primary'
