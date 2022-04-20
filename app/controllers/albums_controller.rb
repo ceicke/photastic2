@@ -3,6 +3,7 @@ class AlbumsController < ApplicationController
 
   # GET /albums or /albums.json
   def index
+    cookies.delete :page
     @albums = Album.where(hidden: false)
   end
 
@@ -12,7 +13,7 @@ class AlbumsController < ApplicationController
       redirect_to root_path, notice: "Album is slated to be removed"
     end
 
-    @elements = Kaminari.paginate_array(@album.stream).page(params[:page]).per(50)
+    @elements = Kaminari.paginate_array(@album.stream).page(set_page).per(50)
   end
 
   # GET /albums/new
@@ -72,5 +73,18 @@ class AlbumsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def album_params
       params.require(:album).permit(:name, :passcode)
+    end
+
+    def set_page
+      if !params[:page].blank?
+        cookies[:page] = params[:page]
+        return params[:page]
+      else
+        if !cookies[:page].blank?
+          return cookies[:page]
+        else
+          return 1
+        end
+      end
     end
 end

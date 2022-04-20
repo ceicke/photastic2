@@ -6,4 +6,14 @@
       %p.card-text
         %small.text-muted= I18n.l(picture.created_at, format: :long)
       %p.card-text= picture.description
-      %small.text-muted= pluralize(picture.comments.length, 'Kommentar', plural: 'Kommentare')
+      %small.text-muted= pluralize(picture.comments.length, 'Kommentar:', plural: 'Kommentare:')
+
+      - picture.comments.each do |comment|
+        .row
+          .col
+            %p
+              .text-muted
+                = comment.name
+                = "(#{I18n.l(comment.created_at, format: :long)}):"
+              = comment.comment
+              = link_to 'Löschen', album_picture_comment_path(@album, picture, comment), data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete }

@@ -43,4 +43,9 @@ RSpec.describe Album, type: :model do
     album = build(:album, name: 'Some test')
     expect(album.subdomain).to eq('some_test')
   end
+
+  it 'should default to "visible"' do
+    album = create(:album)
+    expect(album.hidden?).to be(false)
+  end
 end

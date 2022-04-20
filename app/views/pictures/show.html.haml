@@ -2,7 +2,7 @@
 
 .row
   .col.mb-3
-    = link_to 'Zurück', album_path(@album, anchor: "#{dom_id @picture}"), class: 'btn btn-primary'
+    = generate_back_link(@album, @picture)
     = link_to 'Bearbeiten', edit_album_picture_path(@album, @picture), class: 'btn btn-secondary'
 .row
   .col
