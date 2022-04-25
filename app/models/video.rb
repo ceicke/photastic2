@@ -5,7 +5,7 @@ class Video < ApplicationRecord
   has_one_attached :original_file
   has_one_attached :video_file
   has_one_attached :preview_image do |attachable|
-    attachable.variant :thumb, resize_to_limit: [450, 450]
+    attachable.variant :thumb, resize_to_limit: [450, 450], auto_orient: true
   end
 
   enum :status, { queued: 0, transcoding: 1, transfering: 2, failed: 3, completed: 4 }
