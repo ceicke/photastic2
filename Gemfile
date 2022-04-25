@@ -52,7 +52,7 @@ gem "aws-sdk-s3", "~> 1"
 
 gem "down"
 
-gem "mini_magick"
+gem "ruby-vips"
 
 gem "kaminari"
 gem "bootstrap5-kaminari-views"
