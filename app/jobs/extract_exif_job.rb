@@ -12,7 +12,6 @@ class ExtractExifJob < ApplicationJob
 
     picture.update_attribute(:latitude, data[:gps_latitude]) unless data[:gps_latitude].blank?
     picture.update_attribute(:longitude, data[:gps_longitude]) unless data[:gps_longitude].blank?
-    picture.update_attribute(:orientation, data[:orientation]) unless data[:orientation].blank?
 
     File.delete(path)
   end

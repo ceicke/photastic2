@@ -1,7 +1,7 @@
 .col-md-4.mb-3
   .card{id: "#{dom_id picture}"}
     = link_to album_picture_path(@album, picture) do
-      %img.card-img-top{ src: url_for(picture.thumb), loading: 'lazy', alt: picture.description }
+      %img.card-img-top{ src: url_for(picture.file.variant(:thumb)), loading: 'lazy', alt: picture.description }
     .card-body
       %p.card-text
         %small.text-muted= I18n.l(picture.created_at, format: :long)
