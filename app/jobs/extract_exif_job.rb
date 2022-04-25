@@ -2,7 +2,7 @@ class ExtractExifJob < ApplicationJob
   queue_as :default
 
   def perform(picture)
-    path = Rails.root.join('tmp', picture.file.blob.filename.to_s)
+    path = Rails.root.join('tmp', SecureRandom.uuid.to_s)
     File.open(path, 'wb') do |file|
       file.write(picture.file.blob.download)
     end
