@@ -23,7 +23,8 @@ task :import_noras_pictures => :environment do
     p.file.attach(io: File.open('tmp/nora.jpg'), filename: 'test.jpg')
     p.save
     File.delete('tmp/nora.jpg')
-    
+
+    ExtractExifJob.perform_later(p)
     ProcessVariantsJob.perform_later(p)
 
     picture['comments'].each do |comment|

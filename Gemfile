@@ -54,6 +54,8 @@ gem "down"
 
 gem "ruby-vips"
 
+gem "exiftool_vendored"
+
 gem "kaminari"
 gem "bootstrap5-kaminari-views"
 # Use Sass to process CSS

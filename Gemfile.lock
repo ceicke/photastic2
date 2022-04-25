@@ -143,6 +143,10 @@ GEM
       addressable (~> 2.8)
     erubi (1.10.0)
     erubis (2.7.0)
+    exiftool (1.2.4)
+      json
+    exiftool_vendored (12.41.0)
+      exiftool (>= 0.7.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -193,6 +197,7 @@ GEM
     jmespath (1.6.1)
     jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
+    json (2.6.1)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -393,6 +398,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   down
+  exiftool_vendored
   factory_bot_rails
   faker
   haml-rails (~> 2.0)

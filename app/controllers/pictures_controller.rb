@@ -23,6 +23,7 @@ class PicturesController < ApplicationController
     respond_to do |format|
       if @picture.save
 
+        ExtractExifJob.perform_later(@picture)
         ProcessVariantsJob.perform_later(@picture)
 
         format.html { redirect_to album_picture_url(@album, @picture), notice: "Picture was successfully created." }
