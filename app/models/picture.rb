@@ -3,8 +3,12 @@ class Picture < ApplicationRecord
   validates :album_id, presence: true
 
   has_one_attached :file do |attachable|
-    attachable.variant :thumb, resize_to_limit: [450, 450]
+    # attachable.variant :thumb, resize_to_limit: [450, 450]
     attachable.variant :large, resize_to_limit: [1400, 1400]
+  end
+
+  def thumb
+    file.variant(autorot: true)
   end
 
   belongs_to :album
