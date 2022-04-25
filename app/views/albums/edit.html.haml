@@ -5,7 +5,9 @@
   .col-md-6
     .p-3.mb-2.mt-2.rounded.border.border-danger.border-5
       %h3 Album löschen
-      = button_to 'Löschen', album_path(@album), method: :delete, data: { turbo: false }, class: 'btn btn-danger'
+      = button_to album_path(@album), method: :delete, data: { turbo: false }, class: 'btn btn-danger' do
+        %i.fa.fa-trash
+        Löschen
 
 .mt-3
   = link_to "Abbrechen", @album, class: 'btn btn-secondary'

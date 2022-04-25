@@ -16,10 +16,13 @@
                 = comment.name
                 = "(#{I18n.l(comment.created_at, format: :long)}):"
               = comment.comment
-              = button_to 'Löschen', album_picture_comment_path(@album, picture, comment), class: 'btn btn-danger', method: :delete, data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete }
+              = button_to album_picture_comment_path(@album, picture, comment), class: 'btn btn-outline-danger btn-sm', method: :delete, data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete } do
+                %i.fas.fa-trash
       .row
         .col
-          %button.btn.btn-primary{"data-bs-target" => "#commentModal-#{picture.id}", "data-bs-toggle" => "modal", type: "button"} Neuer Kommentar
+          %button.btn.btn-primary.btn-sm{"data-bs-target" => "#commentModal-#{picture.id}", "data-bs-toggle" => "modal", type: "button"}
+            %i.fa.fa-plus
+            Kommentar
           .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", tabindex: "-1", id: "commentModal-#{picture.id}"}
             .modal-dialog
               .modal-content
