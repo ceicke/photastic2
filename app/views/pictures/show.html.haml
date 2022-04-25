@@ -10,6 +10,9 @@
       %img.img-fluid.rounded{src: url_for(@picture.file.variant(:large)), alt: @picture.description }
       %figcaption.figure-caption
         = I18n.l(@picture.created_at, format: :long)
+        = @picture.latitude
+        = @picture.longitude
+        = @picture.orientation
 .row
   .col
     %p= @picture.description
