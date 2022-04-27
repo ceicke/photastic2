@@ -2,6 +2,12 @@ require 'rails_helper'
 
 describe VideosController do
 
+  before do
+    user = create(:user)
+    allow(controller).to receive(:authenticate_user!).and_return(true)
+    allow(controller).to receive(:current_user).and_return(user)
+  end
+
   describe "#create" do
     it "the job for transcoding the video is enqueed" do
       ActiveJob::Base.queue_adapter = :test

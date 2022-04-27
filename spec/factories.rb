@@ -1,8 +1,4 @@
 FactoryBot.define do
-  factory :user do
-    
-  end
-
   factory :video do
     original_file { Rack::Test::UploadedFile.new('spec/support/test.mp4') }
     description { Faker::Lorem.sentence }
@@ -25,6 +21,14 @@ FactoryBot.define do
   factory :album do
     name { Faker::Name.first_name }
     passcode { Faker::String.random(length: 8) }
+    after(:create) do |album|
+      album.users << FactoryBot.create(:user)
+    end
+  end
+
+  factory :user do
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
   end
 
 end

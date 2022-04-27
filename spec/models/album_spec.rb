@@ -48,4 +48,24 @@ RSpec.describe Album, type: :model do
     album = create(:album)
     expect(album.hidden?).to be(false)
   end
+
+  describe 'album permission checking' do
+    it 'should validate album owners' do
+      album = create(:album)
+      user = album.users.first
+      expect(album.is_owner_or_admin(user)).to be(true)
+    end
+
+    it 'should validate admin users' do
+      album = create(:album)
+      admin = create(:user, admin: true)
+      expect(album.is_owner_or_admin(admin)).to be(true)
+    end
+
+    it 'should not validate non owners' do
+      album = create(:album)
+      user = create(:user)
+      expect(album.is_owner_or_admin(user)).to be(false)
+    end
+  end
 end
