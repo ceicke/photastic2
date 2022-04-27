@@ -1,6 +1,7 @@
 class VideosController < ApplicationController
   before_action :set_video, only: %i[ show edit update destroy ]
   before_action :set_album
+  before_action :check_permission, only: %i[ show edit update destroy ]
 
   # GET /videos/1 or /videos/1.json
   def show
@@ -66,6 +67,10 @@ class VideosController < ApplicationController
 
     def set_album
       @album = Album.find(params[:album_id])
+    end
+
+    def check_permission
+      redirect_to root_path unless @album.is_owner_or_admin(current_user)
     end
 
     # Only allow a list of trusted parameters through.

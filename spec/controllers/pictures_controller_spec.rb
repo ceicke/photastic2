@@ -3,9 +3,9 @@ require 'rails_helper'
 describe PicturesController do
 
   before do
-    user = create(:user)
+    @user = create(:user)
     allow(controller).to receive(:authenticate_user!).and_return(true)
-    allow(controller).to receive(:current_user).and_return(user)
+    allow(controller).to receive(:current_user).and_return(@user)
   end
 
   describe "#create" do
@@ -39,6 +39,22 @@ describe PicturesController do
         }
       }
       expect(response).to redirect_to "/albums/#{album.id}/pictures/1"
+    end
+  end
+
+  describe "show" do
+    it "should show only a picture that the user has access to" do
+      album = create(:album)
+      album.users << @user
+      picture = create(:picture, album: album)
+      get :show, params: {album_id: album.id, id: picture.id}
+      expect(assigns(:picture)).to eq(picture)
+    end
+
+    it "should redirect the user if they don't have access" do
+      picture = create(:picture)
+      get :show, params: {album_id: picture.album.id, id: picture.id}
+      expect(subject).to redirect_to(root_path)
     end
   end
 

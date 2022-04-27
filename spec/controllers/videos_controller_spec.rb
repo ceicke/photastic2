@@ -3,9 +3,9 @@ require 'rails_helper'
 describe VideosController do
 
   before do
-    user = create(:user)
+    @user = create(:user)
     allow(controller).to receive(:authenticate_user!).and_return(true)
-    allow(controller).to receive(:current_user).and_return(user)
+    allow(controller).to receive(:current_user).and_return(@user)
   end
 
   describe "#create" do
@@ -39,6 +39,22 @@ describe VideosController do
         }
       }
       expect(response).to redirect_to "/albums/#{album.id}/videos/1"
+    end
+  end
+
+  describe "show" do
+    it "should show only a video that the user has access to" do
+      album = create(:album)
+      album.users << @user
+      video = create(:video, album: album)
+      get :show, params: {album_id: album.id, id: video.id}
+      expect(assigns(:video)).to eq(video)
+    end
+
+    it "should redirect the user if they don't have access" do
+      video = create(:video)
+      get :show, params: {album_id: video.album.id, id: video.id}
+      expect(subject).to redirect_to(root_path)
     end
   end
 

@@ -1,10 +1,15 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: %i[ show edit update destroy ]
+  before_action :check_permission, only: %i[ show edit update destroy ]
 
   # GET /albums or /albums.json
   def index
     cookies.delete :page
-    @albums = Album.where(hidden: false)
+    if current_user.admin?
+      @albums = Album.where(hidden: false)
+    else
+      @albums = Album.includes(:user_album_associations).where("user_album_associations.user_id": current_user.id, hidden: false)
+    end
   end
 
   # GET /albums/1 or /albums/1.json
@@ -68,6 +73,10 @@ class AlbumsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_album
       @album = Album.find(params[:id])
+    end
+
+    def check_permission
+      redirect_to root_path unless @album.is_owner_or_admin(current_user)
     end
 
     # Only allow a list of trusted parameters through.

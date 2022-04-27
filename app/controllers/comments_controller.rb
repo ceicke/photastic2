@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ destroy ]
   before_action :set_album_and_picture_or_video
+  before_action :check_permission, only: %i[ destroy ]
 
   # POST /comments or /comments.json
   def create
@@ -44,6 +45,10 @@ class CommentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
+    end
+
+    def check_permission
+      redirect_to root_path unless @album.is_owner_or_admin(current_user)
     end
 
     def set_album_and_picture_or_video
