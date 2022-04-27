@@ -106,3 +106,5 @@ end
 gem "sidekiq", "~> 6.4"
 gem "redis-namespace"
 gem 'sinatra', require: false
+
+gem "devise", "~> 4.8"

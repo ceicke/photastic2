@@ -1,5 +1,11 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  devise_scope :user do
+    # Redirests signing out users back to sign-in
+    get "users", to: "devise/sessions#new"
+  end
+  devise_for :users
+  
   # Defines the root path route ("/")
   root "albums#index"
 
