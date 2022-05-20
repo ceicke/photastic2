@@ -62,7 +62,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # Allow external requests
-  config.hosts << "ceicke.duckdns.org"
+  config.hosts << "ceicke.duckdns.org" << "nora.lvh.me" << "maarten.lvh.me" << "norris.lvh.me"
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

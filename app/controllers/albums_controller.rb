@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: %i[ show edit update destroy ]
   before_action :check_permission, only: %i[ show edit update destroy ]
+  before_action :bla
 
   # GET /albums or /albums.json
   def index
@@ -14,11 +15,13 @@ class AlbumsController < ApplicationController
 
   # GET /albums/1 or /albums/1.json
   def show
+    p "show"
     if @album.hidden?
       redirect_to root_path, notice: "Album is slated to be removed"
     end
 
     @elements = Kaminari.paginate_array(@album.stream).page(set_page).per(50)
+    p @elements
   end
 
   # GET /albums/new

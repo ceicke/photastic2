@@ -40,7 +40,7 @@ RSpec.describe Album, type: :model do
   end
 
   it 'generates a correct subdomain' do
-    album = build(:album, name: 'Some test')
+    album = create(:album, name: 'Some test')
     expect(album.subdomain).to eq('some_test')
   end
 

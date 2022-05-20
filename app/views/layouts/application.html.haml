@@ -11,6 +11,7 @@
   %body
     = render 'layouts/navbar'
     .container
+      %pre= p @current_user
       - if notice
         %p.alert.alert-success= notice
       - if alert

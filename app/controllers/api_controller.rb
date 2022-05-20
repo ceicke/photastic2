@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-  skip_before_action :verify_authenticity_token, :authenticate_user!
+  skip_before_action :verify_authenticity_token, :cookie_authenticated?, :check_subdomain
 
   def video_callback
     video = Video.find_by(coconut_job_id: params['job_id'])
