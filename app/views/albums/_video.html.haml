@@ -1,18 +1,18 @@
 .col-md-4.mb-3
   .card{id: "#{dom_id video}"}
-    = link_to album_video_path(@album, video), class: 'text-decoration-none' do
-      - if video.completed?
-        -# %img.card-img-top{ src: url_for(video.preview_image.variant(:thumb)), loading: 'lazy', alt: video.description }
-        %video.ratio.ratio-16x9{controls: 'true', post: url_for(video.preview_image.variant(:thumb))}
-          %source{src: url_for(video.video_file), type: 'video/mp4'}
-      - else
-        - if video.failed?
+    - if video.completed?
+      -# %img.card-img-top{ src: url_for(video.preview_image.variant(:thumb)), loading: 'lazy', alt: video.description }
+      %video.ratio.ratio-16x9{controls: 'true', preload: 'metadata', poster: url_for(video.preview_image.variant(:thumb))}
+        %source{src: url_for(video.video_file), type: 'video/mp4'}
+    - else
+      - if video.failed?
+        = link_to album_video_path(@album, video), class: 'text-decoration-none' do
           .d-flex.align-items-center.justify-content-center{style: 'min-height: 18rem; background-color: #c0c0c0;'}
             %h1 😵
-        - else
-          .d-flex.align-items-center.justify-content-center{style: 'min-height: 18rem; background-color: #c0c0c0;'}
-            .spinner-border.text-dark.top-50{role: 'status'}
-              %span.visually-hidden Video is processing...
+      - else
+        .d-flex.align-items-center.justify-content-center{style: 'min-height: 18rem; background-color: #c0c0c0;'}
+          .spinner-border.text-dark.top-50{role: 'status'}
+            %span.visually-hidden Video is processing...
     .card-body
       %p.card-text
         %small.text-muted
