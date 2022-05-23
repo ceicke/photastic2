@@ -70,6 +70,8 @@ gem "redis-namespace"
 gem "sinatra", require: false
 gem "devise", "~> 4.8"
 
+gem "strscan", "3.0.3"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
