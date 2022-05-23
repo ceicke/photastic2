@@ -9,6 +9,7 @@ class Album < ApplicationRecord
   has_many :users, through: :user_album_associations
 
   after_create :set_subdomain
+  after_create :create_album_user
 
   def stream
     all_elements = pictures + videos
@@ -22,6 +23,11 @@ class Album < ApplicationRecord
   private
     def set_subdomain
       update_attribute(:subdomain, name.parameterize(separator: '_'))
+    end
+
+    def create_album_user
+      user = User.create(email: name.parameterize, password: passcode, password_confirmation: passcode)
+      UserAlbumAssociation.create(album_id: id, user_id: user.id, album_user: true)
     end
 
 end

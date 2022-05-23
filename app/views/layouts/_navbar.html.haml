@@ -1,16 +1,8 @@
-%nav.navbar.navbar-expand-lg.static-top.navbar-dark{style: "background-color: #2596be;"}
+%nav.navbar.navbar-expand-lg.static-top.bg-light
   .container-fluid
-    %a.navbar-brand{href: root_path} Photastic2
-    %ul.navbar-nav
-    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNav", "data-bs-toggle" => "collapse", type: "button"}
-      %span.navbar-toggler-icon
-    #navbarNav.collapse.navbar-collapse
+    %a.navbar-brand.link-dark{href: root_path} Photastic
+    - if current_user
       %ul.navbar-nav
         %li.nav-item
-          %a.nav-link.active{"aria-current" => "page", href: "#"} Home
-        %li.nav-item
-          %a.nav-link{href: "#"} Features
-        %li.nav-item
-          %a.nav-link{href: "#"} Pricing
-        %li.nav-item
-          = button_to "Log Out", destroy_user_session_path, method: :delete, class: 'nav-link'
+          = button_to destroy_user_session_path, method: :delete, class: 'btn btn-link link-dark' do
+            %i.fa.fa-circle-xmark.fa-xl

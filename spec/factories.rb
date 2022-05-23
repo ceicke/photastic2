@@ -20,15 +20,14 @@ FactoryBot.define do
 
   factory :album do
     name { Faker::Name.first_name }
-    passcode { Faker::String.random(length: 8) }
-    after(:create) do |album|
-      album.users << FactoryBot.create(:user)
-    end
+    passcode { Faker::Internet.password }
   end
 
   factory :user do
+    password = Faker::Internet.password
     email { Faker::Internet.email }
-    password { Faker::Internet.password }
+    password { password }
+    password_confirmation { password }
   end
 
 end

@@ -1,18 +1,17 @@
-%p{:style => "color: green"}= notice
-
 .row
   .col.mb-3
     %h1= @album.name
-    .d-grid.gap-2.d-md-flex.justify-content-md-end
-      = link_to new_album_picture_path(@album), class: 'btn btn-primary' do
-        %i.fa.fa-image
-        Bild hochladen
-      = link_to new_album_video_path(@album), class: 'btn btn-primary' do
-        %i.fa.fa-video
-        Video hochladen
-      = link_to edit_album_path(@album), class: 'btn btn-secondary' do
-        %i.fa.fa-pen-to-square
-        Album bearbeiten
+    - unless current_user.is_album_user?
+      .d-grid.gap-2.d-md-flex.justify-content-md-end
+        = link_to new_album_picture_path(@album), class: 'btn btn-primary' do
+          %i.fa.fa-image
+          Bild hochladen
+        = link_to new_album_video_path(@album), class: 'btn btn-primary' do
+          %i.fa.fa-video
+          Video hochladen
+        = link_to edit_album_path(@album), class: 'btn btn-secondary' do
+          %i.fa.fa-pen-to-square
+          Album bearbeiten
 
 .row
   - @elements.each do |stream_element|

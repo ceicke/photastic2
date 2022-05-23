@@ -58,4 +58,18 @@ describe AlbumsController do
     end
   end
 
+  describe "#create" do
+    it "should assign the current user as an album user and create a new album user" do
+      expect {
+        post :create, params: {
+          album: {
+            name: Faker::Name.first_name,
+            passcode: Faker::Internet.password
+          }
+        }
+      }.to change { UserAlbumAssociation.where(album_user: true).count }.by(1)
+
+    end
+  end
+
 end

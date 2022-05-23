@@ -1,9 +1,7 @@
-%p#notice= notice
-
 .row
   .col.mb-3
     = generate_back_link(@album, @picture)
-    = link_to 'Bearbeiten', edit_album_picture_path(@album, @picture), class: 'btn btn-secondary'
+    = link_to 'Bearbeiten', edit_album_picture_path(@album, @picture), class: 'btn btn-secondary' unless current_user.is_album_user?
 .row
   .col
     %figure.figure

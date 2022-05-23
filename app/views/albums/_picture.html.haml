@@ -16,8 +16,9 @@
                 = comment.name
                 = "(#{I18n.l(comment.created_at, format: :long)}):"
               = comment.comment
-              = button_to album_picture_comment_path(@album, picture, comment), class: 'btn btn-outline-danger btn-sm', method: :delete, data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete } do
-                %i.fas.fa-trash
+              - unless current_user.is_album_user?
+                = button_to album_picture_comment_path(@album, picture, comment), class: 'btn btn-outline-danger btn-sm', method: :delete, data: { turbo_confirm: 'Kommentar wirklich löschen?', turbo_method: :delete } do
+                  %i.fas.fa-trash
       .row
         .col
           %button.btn.btn-primary.btn-sm{"data-bs-target" => "#commentModal-#{picture.id}", "data-bs-toggle" => "modal", type: "button"}
@@ -39,9 +40,12 @@
                           - @comment.errors.full_messages.each do |message|
                             %li= message
 
-                    .mb-3
-                      = f.label :name, class: 'form-label'
-                      = f.text_field :name, class: 'form-control'
+                    - if cookies[:commenter_name].blank?
+                      .mb-3
+                        = f.label :name, class: 'form-label'
+                        = f.text_field :name, class: 'form-control'
+                    - else
+                      = f.hidden_field :name, value: cookies[:commenter_name]
                     .mb-3
                       = f.label :comment, class: 'form-label'
                       = f.text_area :comment, class: 'form-control'
