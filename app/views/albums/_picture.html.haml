@@ -3,7 +3,7 @@
     %img.card-img-top{ src: url_for(picture.file.variant(:thumb)), loading: 'lazy', alt: picture.description }
     .card-body
       %p.card-text
-        = link_to album_picture_path(@album, picture) do
+        = link_to album_picture_path(@album, picture), class: 'text-decoration-none' do
           %small.text-muted
             %i.fa.fa-camera
             = I18n.l(picture.created_at, format: :long)
