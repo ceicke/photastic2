@@ -4,8 +4,11 @@
       %img.card-img-top{ src: url_for(picture.file.variant(:thumb)), loading: 'lazy', alt: picture.description }
     .card-body
       %p.card-text
-        %small.text-muted= I18n.l(picture.created_at, format: :long)
-      %p.card-text= picture.description
+        %small.text-muted
+          %i.fa.fa-camera
+          = I18n.l(picture.created_at, format: :long)
+      %p.card-text
+        = picture.description
       %small.text-muted= pluralize(picture.comments.length, 'Kommentar:', plural: 'Kommentare:')
 
       - picture.comments.each do |comment|

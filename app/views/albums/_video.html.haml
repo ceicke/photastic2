@@ -13,8 +13,11 @@
               %span.visually-hidden Video is processing...
     .card-body
       %p.card-text
-        %small.text-muted= I18n.l(video.created_at, format: :long)
-      %p.card-text= video.description
+        %small.text-muted
+          %i.fa.fa-video
+          = I18n.l(video.created_at, format: :long)
+      %p.card-text
+        = video.description
       %small.text-muted= pluralize(video.comments.length, 'Kommentar', plural: 'Kommentare')
 
       - video.comments.each do |comment|
