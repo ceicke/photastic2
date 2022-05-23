@@ -5,8 +5,8 @@ class Album < ApplicationRecord
   has_many :pictures, dependent: :destroy
   has_many :videos, dependent: :destroy
 
-  has_many :user_album_associations
-  has_many :users, through: :user_album_associations
+  has_many :user_album_associations, dependent: :destroy
+  has_many :users, through: :user_album_associations, dependent: :destroy
 
   after_create :set_subdomain
   after_create :create_album_user

@@ -21,6 +21,12 @@ RSpec.describe Album, type: :model do
     expect(UserAlbumAssociation.where(album_id: album.id, album_user: true).length).to eq(1)
   end
 
+  it 'deletes the album user when the album is deleted' do
+    album = create(:album)
+    album.destroy
+    expect(UserAlbumAssociation.where(album_id: album.id, album_user: true).length).to eq(0)
+  end
+
   it 'generates a list of elements' do
     album = create(:album)
 
