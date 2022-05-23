@@ -6,7 +6,7 @@
   .col
     %figure.figure
       - if @video.completed?
-        %video.ratio.ratio-16x9{controls: 'true', preload: 'auto', poster: url_for(@video.preview_image.variant(:thumb))}
+        %video.ratio.ratio-16x9{controls: 'true', poster: url_for(@video.preview_image.variant(:thumb))}
           %source{src: url_for(@video.video_file), type: 'video/mp4'}
       - else
         - if @video.failed?
