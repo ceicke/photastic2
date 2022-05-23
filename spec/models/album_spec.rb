@@ -16,6 +16,11 @@ RSpec.describe Album, type: :model do
     expect(album).to_not be_valid
   end
 
+  it 'creates an album user' do
+    album = create(:album)
+    expect(UserAlbumAssociation.where(album_id: album.id, album_user: true).length).to eq(1)
+  end
+
   it 'generates a list of elements' do
     album = create(:album)
 
@@ -40,7 +45,7 @@ RSpec.describe Album, type: :model do
   end
 
   it 'generates a correct subdomain' do
-    album = build(:album, name: 'Some test')
+    album = create(:album, name: 'Some test')
     expect(album.subdomain).to eq('some_test')
   end
 

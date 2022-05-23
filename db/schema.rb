@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_27_070501) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_23_101322) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_27_070501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false
+    t.string "subdomain"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -59,11 +60,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_27_070501) do
 
   create_table "pictures", force: :cascade do |t|
     t.string "description"
-    t.integer "album_id"
+    t.integer "album_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "latitude"
     t.string "longitude"
+    t.index ["album_id"], name: "index_pictures_on_album_id"
   end
 
   create_table "user_album_associations", force: :cascade do |t|
@@ -71,6 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_27_070501) do
     t.integer "album_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "album_user"
     t.index ["album_id"], name: "index_user_album_associations_on_album_id"
     t.index ["user_id"], name: "index_user_album_associations_on_user_id"
   end
@@ -100,5 +103,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_27_070501) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pictures", "albums"
   add_foreign_key "videos", "albums"
 end

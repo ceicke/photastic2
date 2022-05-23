@@ -2,6 +2,7 @@ class PicturesController < ApplicationController
   before_action :set_picture, only: %i[ show edit update destroy ]
   before_action :set_album
   before_action :check_permission, only: %i[ show edit update destroy ]
+  before_action :check_album_user_permission, only: %i[ new create edit update destroy ]
 
   # GET /pictures/1 or /pictures/1.json
   def show
@@ -71,6 +72,10 @@ class PicturesController < ApplicationController
 
     def check_permission
       redirect_to root_path unless @album.is_owner_or_admin(current_user)
+    end
+
+    def check_album_user_permission
+      redirect_to root_path if current_user.is_album_user?
     end
 
     # Only allow a list of trusted parameters through.

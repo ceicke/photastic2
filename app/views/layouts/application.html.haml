@@ -11,8 +11,14 @@
   %body
     = render 'layouts/navbar'
     .container
+
       - if notice
-        %p.alert.alert-success= notice
+        .alert.alert-success.alert-dismissible.fade.show{:role => "alert"}
+          = notice
+          %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
       - if alert
-        %p.alert.alert-danger= alert
+        .alert.alert-danger.alert-dismissible.fade.show{:role => "alert"}
+          = alert
+          %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+
       = yield

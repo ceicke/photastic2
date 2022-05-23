@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ destroy ]
   before_action :set_album_and_picture_or_video
   before_action :check_permission, only: %i[ destroy ]
+  before_action :check_album_user_permission, only: %i[ destroy ]
 
   # POST /comments or /comments.json
   def create
@@ -10,6 +11,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+
+        cookies.permanent[:commenter_name] = @comment.name
+
         format.html {
           if @element.is_a? Picture
             redirect_to album_url(@album, page: cookies[:page], anchor: "picture_#{@element.id}"), notice: "Comment was successfully created."
@@ -19,7 +23,7 @@ class CommentsController < ApplicationController
         }
         format.json { render :show, status: :created, location: @comment }
       else
-        format.html { redirect_to album_picture_url(@album, @picture), status: :unprocessable_entity }
+        format.html { redirect_to album_picture_url(@album, @element), status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -49,6 +53,10 @@ class CommentsController < ApplicationController
 
     def check_permission
       redirect_to root_path unless @album.is_owner_or_admin(current_user)
+    end
+
+    def check_album_user_permission
+      redirect_to root_path if current_user.is_album_user?
     end
 
     def set_album_and_picture_or_video

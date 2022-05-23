@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: %i[ show edit update destroy ]
   before_action :check_permission, only: %i[ show edit update destroy ]
+  before_action :check_album_user_permission, only: %i[ new create edit update destroy ]
 
   # GET /albums or /albums.json
   def index
@@ -36,6 +37,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
+        @album.users << current_user
         format.html { redirect_to album_url(@album), notice: "Album was successfully created." }
         format.json { render :show, status: :created, location: @album }
       else
@@ -77,6 +79,10 @@ class AlbumsController < ApplicationController
 
     def check_permission
       redirect_to root_path unless @album.is_owner_or_admin(current_user)
+    end
+
+    def check_album_user_permission
+      redirect_to root_path if current_user.is_album_user?
     end
 
     # Only allow a list of trusted parameters through.
