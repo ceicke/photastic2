@@ -52,7 +52,7 @@ task :import_noras_videos => :environment do
 
   counter = 1
 
-  videos_hash.each do |video|
+  videos_hash[0..2].each do |video|
     puts "#{counter} / #{videos_hash.size}"
     Down.download("https://nora.photasti.cc#{video['original_url']}", destination: "tmp/nora.mp4")
     v = Video.new(
