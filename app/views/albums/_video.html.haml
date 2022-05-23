@@ -1,9 +1,9 @@
 .col-md-4.mb-3
   .card{id: "#{dom_id video}"}
     - if video.completed?
-      -# %img.card-img-top{ src: url_for(video.preview_image.variant(:thumb)), loading: 'lazy', alt: video.description }
-      %video.ratio.ratio-16x9{controls: 'true', preload: 'auto', poster: url_for(video.preview_image.variant(:thumb))}
-        %source{src: url_for(video.video_file) + '#t=0.001', type: 'video/mp4'}
+      = link_to album_video_path(@album, video), class: 'text-decoration-none' do
+        %video.ratio.ratio-16x9{controls: 'true', preload: 'auto', poster: url_for(video.preview_image.variant(:thumb))}
+          %source{src: url_for(video.video_file), type: 'video/mp4'}
     - else
       - if video.failed?
         = link_to album_video_path(@album, video), class: 'text-decoration-none' do
