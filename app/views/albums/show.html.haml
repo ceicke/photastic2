@@ -1,7 +1,9 @@
 .row
   .col.mb-3
-    %h1= @album.name
-    - unless current_user.is_album_user?
+    %h1
+      = link_to album_path(@album), class: 'text-decoration-none link-dark' do
+        = @album.name
+    - if !current_user.is_album_user? && (!params[:page].present? || params[:page] == 1)
       .d-grid.gap-2.d-md-flex.justify-content-md-end
         = link_to new_album_picture_path(@album), class: 'btn btn-primary' do
           %i.fa.fa-image
