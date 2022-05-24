@@ -4,6 +4,7 @@ desc 'Create albums with images for development'
 task :hello_world => :environment do
   rand(2..5).times do
     album = Album.create(name: Faker::Name.first_name, passcode: Faker::String.random(length: 8))
+    album.users << User.first
     print '📔 '
     rand(8..12).times do
       Down.download("https://picsum.photos/1500/1300", destination: "tmp/tmp_file.jpg")
@@ -24,6 +25,7 @@ desc 'Create one big album with 200 pictures for development'
 task :hello_big_world => :environment do
   1.times do
     album = Album.create(name: Faker::Name.first_name, passcode: Faker::String.random(length: 8))
+    album.users << User.first
     print '📔 '
     200.times do
       Down.download("https://picsum.photos/1500/1300", destination: "tmp/tmp_file.jpg")
