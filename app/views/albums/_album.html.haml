@@ -2,7 +2,7 @@
   .card{id: "#{dom_id album}"}
     - if album.pictures.any?
       = link_to album do
-        %img.card-img-top{ src: url_for(album.pictures.first.file.variant(:thumb)), loading: 'lazy', alt: album.name }
+        %img.card-img-top{ src: url_for(album.pictures.last.file.variant(:bigthumb)), loading: 'lazy', alt: album.name }
     - else
       = link_to album do
         = image_tag 'c4c4c4.jpg', loading: 'lazy', alt: album.name, class: 'card-img-top'
