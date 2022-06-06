@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   end
 
   post 'api/video_callback'
+  get 'api/favorites'
   mount Sidekiq::Web => '/sidekiq'
 end
