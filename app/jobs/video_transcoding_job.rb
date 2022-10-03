@@ -9,7 +9,7 @@ class VideoTranscodingJob < ApplicationJob
     if Rails.env.development?
       current_host = 'http://ceicke.duckdns.org'
     else
-      current_host = 'http://ceicke.de'
+      current_host = 'https://www.photasti.cc'
     end
 
     notification = Coconut.notification = {
