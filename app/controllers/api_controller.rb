@@ -3,14 +3,19 @@ class ApiController < ApplicationController
   before_action :authenticate_user!, only: [ :favorites ]
 
   def video_callback
+    logger.info "Video callback for job: #{params['job_id']}"
     video = Video.find_by(coconut_job_id: params['job_id'])
 
     unless video.nil?
       if params['event'] == 'job.failed'
+        logger.info "Job has failed on upstream provider."
         video.failed!
       elsif params['event'] == 'job.completed'
+        logger.info "Job completed."
         VideoTransferJob.perform_later(video)
       end
+    else
+      logger.info "Video for job not found."
     end
 
     head :ok

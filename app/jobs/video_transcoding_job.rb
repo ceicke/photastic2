@@ -2,6 +2,7 @@ class VideoTranscodingJob < ApplicationJob
   queue_as :default
 
   def perform(video)
+    logger.info "Video transcoding job for video: #{video.id}"
     video.transcoding!
 
     Coconut.api_key = Rails.application.credentials.coconut[:api_key]
@@ -46,6 +47,7 @@ class VideoTranscodingJob < ApplicationJob
       }
     )
 
+    logger.info "Created coconut job: #{job.id}, callback URL: #{original_file_url}"
     video.update_attribute(:coconut_job_id, job.id)
   end
 end

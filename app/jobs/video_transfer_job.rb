@@ -2,6 +2,7 @@ class VideoTransferJob < ApplicationJob
   queue_as :default
 
   def perform(video)
+    logger.info "Transfering Video #{video.id}"
     video.transfering!
 
     s3_client = Aws::S3::Client.new({
@@ -18,6 +19,7 @@ class VideoTransferJob < ApplicationJob
 
   private
     def transfer_video_file(s3_client, video)
+      logger.info "Transfering video file."
       s3_client.get_object({bucket: 'photasti.cc', key: "photastic2/video_#{video.id}/1080p.mp4"}, target: "tmp/#{video.id}-1080p.mp4")
       video.video_file.attach(io: File.open("tmp/#{video.id}-1080p.mp4"), filename: '1080p.mp4')
 
@@ -26,6 +28,7 @@ class VideoTransferJob < ApplicationJob
     end
 
     def transfer_preview_file(s3_client, video)
+      logger.info "Transfering preview file."
       s3_client.get_object({bucket: 'photasti.cc', key: "photastic2/video_#{video.id}/preview.jpg"}, target: "tmp/#{video.id}-preview.jpg")
       video.preview_image.attach(io: File.open("tmp/#{video.id}-preview.jpg"), filename: 'preview.jpg')
 
