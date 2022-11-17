@@ -31,3 +31,4 @@ jobs:
       with:
         target: production # Defines the environment that will be used for the deployment
         deploy_key: ${{ secrets.DEPLOY_ENC_KEY }} # Name of the variable configured in Settings/Secrets of your github project
+        enc_rsa_key_pth: config/deploy_id_ed25519_enc
