@@ -60,13 +60,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_084939) do
 
   create_table "pictures", force: :cascade do |t|
     t.string "description"
-    t.integer "album_id", null: false
+    t.integer "album_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "latitude"
     t.string "longitude"
     t.boolean "favorite"
-    t.index ["album_id"], name: "index_pictures_on_album_id"
   end
 
   create_table "user_album_associations", force: :cascade do |t|
@@ -104,6 +103,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_084939) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "pictures", "albums"
   add_foreign_key "videos", "albums"
 end
