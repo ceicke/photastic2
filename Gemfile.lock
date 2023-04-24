@@ -292,7 +292,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
-    redis (4.8.1)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.14.1)
+      connection_pool
     redis-namespace (1.10.0)
       redis (>= 4)
     regexp_parser (2.7.0)
@@ -327,10 +330,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sidekiq (6.5.8)
-      connection_pool (>= 2.2.5, < 3)
-      rack (~> 2.0)
-      redis (>= 4.5.0, < 5)
+    sidekiq (7.0.8)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.11.0)
     sinatra (3.0.5)
       mustermann (~> 3.0)
       rack (~> 2.2, >= 2.2.4)
@@ -420,7 +424,7 @@ DEPENDENCIES
   rspec-rails
   ruby-vips
   selenium-webdriver
-  sidekiq (~> 6.4)
+  sidekiq (~> 7.0)
   sinatra
   sprockets-rails
   sqlite3 (~> 1.4)

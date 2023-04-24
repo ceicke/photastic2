@@ -65,7 +65,7 @@ gem "bootstrap5-kaminari-views"
 gem "image_processing", "~> 1.2"
 gem "activestorage-validator"
 
-gem "sidekiq", "~> 6.4"
+gem "sidekiq", "~> 7.0"
 gem "redis-namespace"
 gem "sinatra", require: false
 gem "devise", "~> 4.8"
