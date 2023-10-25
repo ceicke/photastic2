@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.17.0"
+lock "~> 3.18.0"
 
 set :application, "photastic2"
 set :repo_url, "git@github.com:ceicke/photastic2.git"
