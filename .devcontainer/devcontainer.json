@@ -1,0 +1,7 @@
+{
+  "name": "Photastic2",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "web",
+  "workspaceFolder": "/photastic2",
+  "shutdownAction": "stopCompose"
+}
