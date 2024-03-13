@@ -3,5 +3,11 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "web",
   "workspaceFolder": "/photastic2",
-  "shutdownAction": "stopCompose"
+  "shutdownAction": "stopCompose",
+  "portsAttributes": {
+    "3000": {
+      "label": "Photastic2",
+      "onAutoForward": "notify"
+    }
+  }
 }
